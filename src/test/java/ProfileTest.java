@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Condition;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -8,15 +9,16 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class ProfileTest {
     @Test
+    @DisplayName("Успешная авторизация")
     public void shouldOpenProfileTest() {
         open("https://github.com/");
-        $("[href='/login']").click();
-        $("[id='login_field']").sendKeys("Vakavava");
-        $("[id='password']").sendKeys("JingleBells1984");
-        $(".js-sign-in-button").click();
-        $(".Header").shouldBe(Condition.visible);
-        $("[aria-label='View profile and more']").click();
-        $(byText("Your profile")).click();
-        $(".vcard-username").shouldHave(text("Vakavava"));
+        TestPages.authPage.mainSignInButton().click();
+        TestPages.authPage.logInInput().sendKeys("Vakavava");
+        TestPages.authPage.passwordInput().sendKeys("JingleBells1984");
+        TestPages.authPage.signInButton().click();
+        TestPages.profilePage.header().shouldBe(Condition.visible);
+        TestPages.profilePage.profileDropDown().click();
+        TestPages.profilePage.myProfileButton().click();
+        TestPages.profilePage.accountName().shouldHave(text("Vakavava"));
     }
 }
