@@ -15,4 +15,7 @@ public abstract class BasePage {
     public SelenideElement myProfileButton() {
         return $(byText("Your profile")).as("кнопка 'Мой профиль'");
     }
+    public SelenideElement branchDropdown() {
+        return $("[title='Switch branches or tags']").as("дропдаун для переключения веток");
+    }
 }
