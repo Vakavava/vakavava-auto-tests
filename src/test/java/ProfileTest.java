@@ -10,13 +10,21 @@ public class ProfileTest {
     @DisplayName("Успешная авторизация")
     public void shouldOpenProfileTest() {
         open("https://github.com/");
-        TestPages.authPage.mainSignInButton().click();
-        TestPages.authPage.logInInput().sendKeys("Vakavava");
-        TestPages.authPage.passwordInput().sendKeys("JingleBells1984");
-        TestPages.authPage.signInButton().click();
-        TestPages.profilePage.header().shouldBe(Condition.visible);
-        TestPages.profilePage.profileDropDown().click();
-        TestPages.profilePage.myProfileButton().click();
-        TestPages.profilePage.accountName().shouldHave(text("Vakavava"));
+        TestPages.authPage.mainSignInButton()
+                .click();
+        TestPages.authPage.logInInput()
+                .sendKeys("Vakavava");
+        TestPages.authPage.passwordInput()
+                .sendKeys("JingleBells1984");
+        TestPages.authPage.signInButton()
+                .click();
+        TestPages.profilePage.header()
+                .shouldBe(Condition.visible);
+        TestPages.profilePage.profileDropDown()
+                .click();
+        TestPages.profilePage.myProfileButton()
+                .click();
+        TestPages.profilePage.accountName()
+                .shouldHave(text("Vakavava"));
     }
 }

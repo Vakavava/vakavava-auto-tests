@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -22,18 +23,26 @@ public class JUnitTest {
     @Test
     @DisplayName("Переход на ветку fixtures")
     public void shouldOpenFixturesBranch(){
-        TestPages.profilePage.branchDropdown().click();
-        TestPages.junitPage.repoFixturesButton().click();
-        TestPages.junitPage.commitsInBranchNotification().shouldBe(Condition.visible);
+        TestPages.profilePage.branchDropdown()
+                .click();
+        TestPages.junitPage.repoFixturesButton()
+                .click();
+        TestPages.junitPage.commitsInBranchNotification()
+                .shouldBe(Condition.visible);
     }
 
     @MethodSource("correctData")
     @ParameterizedTest(name = "по {0}")
     @DisplayName("Поиск релизов")
     public void shouldSearchReleasesByNameAndNumber(String type, String searchData, String searchResults) {
-        TestPages.junitPage.releasesButton().click();
-        TestPages.junitPage.searchInput().sendKeys(searchData + Keys.ENTER);
-        TestPages.junitPage.nameOfRelease().shouldHave(text(searchResults));
+        TestPages.junitPage.releasesButton()
+                .click();
+        TestPages.junitPage.tabReleases()
+                        .shouldBe(Condition.visible);
+        TestPages.junitPage.searchInput()
+                .sendKeys(searchData + Keys.ENTER);
+        TestPages.junitPage.nameOfRelease()
+                .shouldHave(text(searchResults));
     }
 
     static Stream<Arguments> correctData() {
