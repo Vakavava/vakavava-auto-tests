@@ -22,4 +22,7 @@ public class JUnitPage {
     public SelenideElement nameOfRelease() {
         return $(".Box-body").as("название релиза");
     }
+    public SelenideElement tabReleases() {
+        return $(".js-selected-navigation-item.selected.subnav-item").as("таб релиза");
+    }
 }
